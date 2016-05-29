@@ -1,0 +1,190 @@
+---
+swagger: "2.0"
+info:
+  description: "Exoneration Registry API"
+  version: "1.0"
+  title: "ExonerationRegistryAPI"
+host: "web2.law.umich.edu"
+basePath: "/ExonerationRegistryAPI/api"
+schemes:
+- "https"
+produces:
+- "application/json"
+paths:
+  /cases:
+    get:
+      tags:
+      - "Exonerations"
+      summary: "Exoneration Case Summary List"
+      description: "The Exoneration Case Summary List endpoint.\n"
+      parameters: []
+      responses:
+        200:
+          description: "An array of exoneration cases"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ExonerationCaseSummary"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+  /cases/count:
+    get:
+      tags:
+      - "Exonerations"
+      summary: "Exoneration Case Count"
+      description: "The Exoneration Case Count endpoint.\n"
+      parameters: []
+      responses:
+        200:
+          description: "Exoneration case count"
+          schema:
+            $ref: "#/definitions/ExonerationCaseCount"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+  /cases/{caseID}:
+    get:
+      tags:
+      - "Exonerations"
+      summary: "Exoneration Case Detail"
+      description: "The Exoneration Case Detail endpoint.\n"
+      parameters:
+      - name: "caseID"
+        in: "path"
+        description: "Unique exoneration case identifier."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Exoneration case detail"
+          schema:
+            $ref: "#/definitions/ExonerationCaseDetail"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+definitions:
+  ExonerationCaseCount:
+    type: "object"
+    properties:
+      NumberOfExonerations:
+        type: "number"
+        description: "Number Of Exonerations."
+      LatestExonerationID:
+        type: "number"
+        description: "Latest Exoneration Case ID."
+  ExonerationCaseSummary:
+    type: "object"
+    properties:
+      CaseID:
+        type: "number"
+        description: "Case ID."
+      FirstName:
+        type: "string"
+        description: "First name of the Exoneree."
+      LastName:
+        type: "string"
+        description: "Last name of the Exoneree."
+      State:
+        type: "string"
+        description: "State."
+      DateOfExoneration:
+        type: "string"
+        description: "Date Of Exoneration."
+      PostingDate:
+        type: "string"
+        description: "Posting Date."
+      FeatureDescription:
+        type: "string"
+        description: "Feature Description."
+      LinkToImage:
+        type: "string"
+        description: "Link To Image."
+      LinkToThumbnail:
+        type: "string"
+        description: "Link To Thumbnail."
+  ExonerationCaseDetail:
+    type: "object"
+    properties:
+      CaseID:
+        type: "number"
+        description: "Case ID."
+      FirstName:
+        type: "string"
+        description: "First name of the Exoneree."
+      LastName:
+        type: "string"
+        description: "Last name of the Exoneree."
+      LinkToImage:
+        type: "string"
+        description: "Link To Image."
+      LinkToThumbnail:
+        type: "string"
+        description: "Link To Thumbnail."
+      PhotoByline:
+        type: "string"
+        description: "Photo Byline."
+      State:
+        type: "string"
+        description: "State."
+      County:
+        type: "string"
+        description: "County."
+      MostSeriousCrime:
+        type: "string"
+        description: "Most Serious Crime."
+      AdditionalConvictions:
+        type: "string"
+        description: "Additional Convictions."
+      ReportedCrimeDate:
+        type: "string"
+        description: "Reported Crime Date."
+      Convicted:
+        type: "string"
+        description: "Convicted."
+      Exonerated:
+        type: "string"
+        description: "Exonerated."
+      Sentence:
+        type: "string"
+        description: "Sentence."
+      Race:
+        type: "string"
+        description: "Race."
+      Sex:
+        type: "string"
+        description: "Sex."
+      Age:
+        type: "string"
+        description: "Age."
+      ContributingFactors:
+        type: "string"
+        description: "Contributing Factors."
+      DNA:
+        type: "string"
+        description: "DNA."
+      PostingDate:
+        type: "string"
+        description: "Posting Date."
+      LastUpdateDate:
+        type: "string"
+        description: "Last Update Date."
+      FeatureDescription:
+        type: "string"
+        description: "Feature Description."
+      Narrative:
+        type: "string"
+        description: "Narrative."
+  Error:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      message:
+        type: "string"
+      fields:
+        type: "string"
